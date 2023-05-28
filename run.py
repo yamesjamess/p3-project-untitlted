@@ -1,7 +1,3 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -19,6 +15,20 @@ SHEET = GSPREAD_CLIENT.open('yarn_genie')
 patterns = SHEET.worksheet('patterns')
 
 data = patterns.get_all_values()
+
+def get_yarn_data():
+    """
+    Get yarn information input from user
+    """
+    print('Please enter your yarn information.')
+    print('\nInformation should be 6 categories, separate by commas.')
+    print('Yarn Name, Material, Yarn Weight, Yarn Length, Colour, Quantity')
+    print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
+
+    yarn_data = input('Enter your yarn information here: \n')
+    print(f'\nThe information provided is {yarn_data}') #need to colourise yarn data
+
+get_yarn_data()
 
 def main():
     """
@@ -50,5 +60,3 @@ def main():
         else:
             print('Invalid option, please eneter a number from 1 - 5\n')
             input('Press Enter to continue...\n')
-
-main()
