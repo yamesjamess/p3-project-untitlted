@@ -59,7 +59,16 @@ def validate_data(values):
     return True
 
 
-info = get_yarn_info()
+def update_yarns_worksheet(data):
+    """
+    Update yarns worksheet, add new column with list data provided
+    """
+    print('Updating yarns worksheet...\n')
+    yarns_worksheet = SHEET.worksheet('yarns')
+    yarns_worksheet.append_row( data)
+    print('Yarns worksheet updated successfully!\n')
+
+
 
 def main():
     """
@@ -92,3 +101,6 @@ def main():
             print('Invalid option, please eneter a number from 1 - 5\n')
             input('Press Enter to continue...\n')
 
+yarns_info = get_yarn_info()
+update_yarns_worksheet(yarns_info)
+print(yarns_info)
