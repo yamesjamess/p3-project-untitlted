@@ -16,19 +16,25 @@ patterns = SHEET.worksheet('patterns')
 
 data = patterns.get_all_values()
 
-def get_yarn_data():
+def get_yarn_info():
     """
     Get yarn information input from user
     """
-    print('Please enter your yarn information.')
-    print('\nInformation should be 6 categories, separate by commas.')
-    print('Yarn Name, Material, Yarn Weight, Yarn Length, Colour, Quantity')
-    print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
+    while True:
+        print('Please enter your yarn information.')
+        print('\nInformation should be 6 categories, separate by commas.')
+        print('Yarn Name, Material, Yarn Weight, Yarn Length, Colour, Quantity')
+        print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
 
-    yarn_data = input('Enter your yarn information here: \n')
+        yarn_data = input('Enter your yarn information here: \n')
     
-    yarn_info = yarn_data.split(',')
-    validate_data(yarn_info)
+        yarn_info = yarn_data.split(',')
+        
+        if validate_data(yarn_info):
+            print("\nInformation is valid!")
+            break
+
+    return yarn_info
 
 def validate_data(values):
     """
@@ -41,16 +47,19 @@ def validate_data(values):
         indices = [3, 5]
         for index in indices:
             values[index] = int(values[index])
-            
+
         if len(values) != 6:
             raise ValueError(
                 f'6 values required, you provided {len(values)}'    
             )
     except ValueError as e:
         print(f'Invalid data: {e}, please try again.\n')
+        return False
+
+    return True
 
 
-get_yarn_data()
+info = get_yarn_info()
 
 def main():
     """
@@ -82,3 +91,4 @@ def main():
         else:
             print('Invalid option, please eneter a number from 1 - 5\n')
             input('Press Enter to continue...\n')
+
