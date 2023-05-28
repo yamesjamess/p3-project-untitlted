@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from tabulate import tabulate
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -11,9 +12,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('yarn_genie')
-
 patterns = SHEET.worksheet('patterns')
-
 data = patterns.get_all_values()
 
 def get_yarn_info():
@@ -24,7 +23,7 @@ def get_yarn_info():
         print('Please enter your yarn information.')
         print('\nInformation should be 6 categories, separate by commas.')
         print('Yarn Name, Material, Yarn Weight, Yarn Length, Colour, Quantity')
-        print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
+        print('\nExample: Rico, Cotton, Double Knit, 200, Teal, 1\n')
 
         yarn_data = input('Enter your yarn information here: \n')
     
@@ -34,7 +33,8 @@ def get_yarn_info():
             print("\nInformation is valid!")
             break
 
-    return yarn_info
+    update_yarns_worksheet(yarn_info)
+
 
 def validate_data(values):
     """
@@ -69,8 +69,49 @@ def update_yarns_worksheet(data):
     print('Yarns worksheet updated successfully!\n')
 
 
+def show_yarn():
+    """
+    Print out a table of all the values from specific worksheet
+    """
+        print('You have the following yarns in your stash!\n')
+        stash = SHEET.worksheet('yarns').get_all_values()
+        print(tabulate(stash))
 
-def main():
+
+def remove_yarn():
+    print('remove yarn')
+
+
+def sub_menu(str, add_func, remove_func):
+    """
+    Display add and back sub menu until the user select a valid option
+    then calls the requested funcion
+    
+        Arguments:
+            str: title of the submenu (patterns/yarns/hooks)
+            add_func: calls add_function
+            back_func: calls back function
+    """
+    while True:
+        show_yarn()
+        print(f'\n1. Add {str}')
+        print(f'2. Remove {str}')
+        print(f'3. Go back to main menu')
+
+        user_input = input('\nPlease select an option by entering a number from 1, 2, or 3\n')
+
+        if user_input == '1':
+            get_yarn_info()
+        elif user_input == '2':
+            remove_yarn()
+        elif user_input == '3':
+            break
+        else:
+            print('Invalid option, please eneter a number from 1, 2, or 3\n')
+            input('Press Enter to continue...\n')
+
+
+def main_menu():
     """
     Display the main menu to the user until they select an option or exit
     """
@@ -89,7 +130,7 @@ def main():
         if user_input == '1':
             print('call function show_patterns')
         elif user_input == '2':
-            print('call function show_yarns')
+            sub_menu('a yarn', get_yarn_info, remove_yarn)
         elif user_input == '3':
             print('call function show_hooks')
         elif user_input == '4':
@@ -101,6 +142,13 @@ def main():
             print('Invalid option, please eneter a number from 1 - 5\n')
             input('Press Enter to continue...\n')
 
-yarns_info = get_yarn_info()
-update_yarns_worksheet(yarns_info)
-print(yarns_info)
+
+def main():
+    """
+    Run all program functions
+    """
+    main_menu()
+
+
+
+main()
