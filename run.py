@@ -33,7 +33,7 @@ def get_yarn_info():
             print("\nInformation is valid!")
             break
 
-    update_yarns_worksheet(yarn_info)
+    add_to_worksheet(yarn_info, 'yarns')
 
 
 def validate_data(values):
@@ -58,28 +58,29 @@ def validate_data(values):
 
     return True
 
-
-def update_yarns_worksheet(data):
-    """
-    Update yarns worksheet, add new column with list data provided
-    """
-    print('Updating yarns worksheet...\n')
-    yarns_worksheet = SHEET.worksheet('yarns')
-    yarns_worksheet.append_row( data)
-    print('Yarns worksheet updated successfully!\n')
-
-
-def show_yarn():
+def show_worksheet(worksheet):
     """
     Print out a table of all the values from specific worksheet
     """
-        print('You have the following yarns in your stash!\n')
-        stash = SHEET.worksheet('yarns').get_all_values()
-        print(tabulate(stash))
+    print(f'You have the following {worksheet} in your stash!\n')
+    stash = SHEET.worksheet(worksheet).get_all_values()
+    print(tabulate(stash))
+
+def add_to_worksheet(data, worksheet):
+    """
+    Update relevant worksheet, add new row with list data provided
+    """
+    print(f'Updating {worksheet} worksheet...\n')
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f'{worksheet} worksheet updated successfully!\n')
+
+    if worksheet == 'yarns':
+        show_worksheet(worksheet)
 
 
-def remove_yarn():
-    print('remove yarn')
+def remove_from_worksheet(worksheet):
+    print('Which item do you want to remove?\n')
 
 
 def sub_menu(str, add_func, remove_func):
@@ -93,17 +94,21 @@ def sub_menu(str, add_func, remove_func):
             back_func: calls back function
     """
     while True:
-        show_yarn()
-        print(f'\n1. Add {str}')
-        print(f'2. Remove {str}')
+        print(f'\n1. Add a {str}')
+        print(f'2. Remove last added {str}')
         print(f'3. Go back to main menu')
 
         user_input = input('\nPlease select an option by entering a number from 1, 2, or 3\n')
 
         if user_input == '1':
-            get_yarn_info()
+            if str == 'pattern':
+                get_pattern_info()
+            elif str == 'yarn':
+                get_yarn_info()
+            elif str == 'hook':
+                get_hook_info()
         elif user_input == '2':
-            remove_yarn()
+            remove_from_worksheet
         elif user_input == '3':
             break
         else:
@@ -128,10 +133,13 @@ def main_menu():
         user_input = input('\nPlease select an option by entering a number from 1 - 5\n')
 
         if user_input == '1':
+            show_worksheet('patterns')
             print('call function show_patterns')
         elif user_input == '2':
-            sub_menu('a yarn', get_yarn_info, remove_yarn)
+            show_worksheet('yarns')
+            sub_menu('yarn', get_yarn_info, remove_from_worksheet)
         elif user_input == '3':
+            show_worksheet('hooks')
             print('call function show_hooks')
         elif user_input == '4':
             print('call function calculate')
@@ -149,6 +157,4 @@ def main():
     """
     main_menu()
 
-
-
-main()
+# main()
