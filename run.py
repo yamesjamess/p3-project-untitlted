@@ -26,7 +26,24 @@ def get_yarn_data():
     print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
 
     yarn_data = input('Enter your yarn information here: \n')
-    print(f'\nThe information provided is {yarn_data}') #need to colourise yarn data
+    
+    yarn_info = yarn_data.split(',')
+    validate_data(yarn_info)
+
+def validate_data(values):
+    """
+    Convert the 3rd and 5th index into integers.
+    Raise ValueError if strings cannot be converted into integers,
+    or if there aren't exactly 6 values.
+    """
+    try:
+        if len(values) != 6:
+            raise ValueError(
+                f'6 values required, you provided {len(values)}'    
+            )
+    except ValueError as e:
+        print(f'Invalid data: {e}, please try again.\n')
+
 
 get_yarn_data()
 
