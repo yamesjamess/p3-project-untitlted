@@ -37,6 +37,11 @@ def validate_data(values):
     or if there aren't exactly 6 values.
     """
     try:
+        # convert data at 3rd and 5th indices into intergers
+        indices = [3, 5]
+        for index in indices:
+            values[index] = int(values[index])
+            
         if len(values) != 6:
             raise ValueError(
                 f'6 values required, you provided {len(values)}'    
