@@ -29,7 +29,7 @@ def show_worksheet(worksheet):
 
 def add_to_worksheet(data, worksheet):
     """
-    Update relevant worksheet, add new row with list data provided
+    Update relevant worksheet, add new row with list data provided.
     """
     print(f'Updating {worksheet} worksheet...\n')
     worksheet_to_update = SHEET.worksheet(worksheet)
@@ -42,9 +42,27 @@ def add_to_worksheet(data, worksheet):
         show_worksheet(worksheet)
 
 
-def remove_from_worksheet(worksheet):
-    print('Which item do you want to remove?\n')
+def remove_last_item(worksheet):
+    """
+    Remove the last row in the relevant worksheet.
+    """
+    print(f'\nDo you want to remove the last time from your {worksheet} list?\n')
+    worksheet_to_remove = SHEET.worksheet(worksheet)
+    user_input = input('Enter Y/N to confirm...\n')
 
+    while True:
+        if user_input.upper() == 'Y' or user_input.upper() == 'YES':
+            print('\nRemoving last item from your list...')
+            print('\nItem removed!')
+            input('\nPress Enter to continue...')
+            break
+        elif user_input.upper() == 'N' or user_input.upper() == 'NO':
+            print('\nRetuning to the sub-menu')
+            input('\nPress Enter to continue...')
+            break
+        else:
+            print('\nInvalid option, please try again...')
+            user_input = input('Enter Y/N to confirm...\n')
 
 
 # User input section
@@ -200,7 +218,12 @@ def sub_menu(str, worksheet, add_func, remove_func):
             elif str == 'hook':
                 get_user_data('hook', 2)
         elif user_input == '2':
-            remove_from_worksheet
+            if str == 'pattern':
+                remove_last_item('patterns')
+            elif str == 'yarn':
+                remove_last_item('yarns')
+            elif str == 'hook':
+                remove_last_item('hooks')
         elif user_input == '3':
             break
         else:
@@ -242,11 +265,11 @@ def main_menu():
         user_input = input('\nPlease select an option by entering a number from 1 - 5\n')
 
         if user_input == '1':
-            sub_menu('pattern','patterns', get_user_data, remove_from_worksheet)
+            sub_menu('pattern','patterns', get_user_data, remove_last_item)
         elif user_input == '2':
-            sub_menu('yarn', 'yarns', get_user_data, remove_from_worksheet)
+            sub_menu('yarn', 'yarns', get_user_data, remove_last_item)
         elif user_input == '3':
-            sub_menu('hook', 'hooks', get_user_data, remove_from_worksheet)
+            sub_menu('hook', 'hooks', get_user_data, remove_last_item)
         elif user_input == '4':
             print('call function calculate')
         elif user_input == '5':
