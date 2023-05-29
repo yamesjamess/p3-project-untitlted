@@ -21,6 +21,7 @@ def show_worksheet(worksheet):
     """
     Print out a table of all the values from specific worksheet
     """
+    clear()
     print(f'You have the following {worksheet} in your stash!\n')
     stash = SHEET.worksheet(worksheet).get_all_values()
     print(tabulate(stash))
@@ -34,8 +35,10 @@ def add_to_worksheet(data, worksheet):
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
     print(f'{worksheet} worksheet updated successfully!\n')
+    input('Press Enter to add another item...\n')
 
     if worksheet == 'yarns':
+        clear()
         show_worksheet(worksheet)
 
 
@@ -50,7 +53,7 @@ def get_user_data(type, num):
     Get pattern/yarn/hook information input from user
     """
     while True:
-        print(f'Please enter your {type} information.')
+        print(f'\nPlease enter your {type} information.')
         print(f'\nInformation should be {num} categories, separate by commas.')
 
         if type == 'pattern':
@@ -66,7 +69,7 @@ def get_user_data(type, num):
 
             pattern_info = pattern_data.split(',')
             if validate_pattern(pattern_info):
-                print('\nInformation is valid!')
+                print('\nInformation is valid!\n')
                 add_to_worksheet(pattern_info, 'patterns')
 
         elif type == 'yarn':
@@ -82,7 +85,7 @@ def get_user_data(type, num):
 
             yarn_info = yarn_data.split(',')
             if validate_yarn(yarn_info):
-                print('\nInformation is valid!')
+                print('\nInformation is valid!\n')
                 add_to_worksheet(yarn_info, 'yarns')
 
         elif type == 'hook':
@@ -99,7 +102,7 @@ def get_user_data(type, num):
 
             hook_info = hook_data.split(',')
             if validate_hook(hook_info):
-                print('\nInformation is valid!')
+                print('\nInformation is valid!\n')
                 add_to_worksheet(hook_info, 'hooks')
 
         else:
@@ -149,7 +152,7 @@ def validate_hook(values):
     Check if user has input the correct values for hooks
     """
     try:
-        # convert data at 1st to be boolean
+        # convert data at 1st index to be boolean
         values[1] = bool(values[1])
 
         if len(values) != 2:
@@ -162,7 +165,6 @@ def validate_hook(values):
 
     return True
 
-# Hooks Section
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
@@ -211,6 +213,15 @@ def clear():
     print('\033c')
 
 
+def art():
+    print("                                         .-.                     ")
+    print("  .-.   .-                        .--.`-'               .-.      ")
+    print("    /  (  .-.    ).--..  .-.     /  (_;    .-..  .-.    `-' .-.  ")
+    print("   (    )(  |   /      )/   )   /        ./.-'_)/   )  /  ./.-'_ ")
+    print(" .  `..'  `-'-'/      '/   (   (     --;-(__.''/   (_.(__.(__.'  ")
+    print("(__.-'                      `-  `.___.'             `-           \n")
+
+
 def main_menu():
     """
     Display the main menu to the user until they select an option or exit
@@ -218,8 +229,9 @@ def main_menu():
 
     while True:
         clear()
+        art()
         print('Welcome to Yarn Genie! Your Magical Database for '
-            'Crochet Patterns, Yarns and Hooks\n')
+            'Crochet Patterns, Yarns and Hooks!\n')
         print('1. View your patterns pieces.')
         print('2. View your yarn stash.')
         print('3. View your hook hoards.')
