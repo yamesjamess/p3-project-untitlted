@@ -164,7 +164,7 @@ def validate_hook(values):
 
 # Hooks Section
 
-def sub_menu(str, add_func, remove_func):
+def sub_menu(str, worksheet, add_func, remove_func):
     """
     Display add and back sub menu until the user select a valid option
     then calls the requested funcion
@@ -175,6 +175,14 @@ def sub_menu(str, add_func, remove_func):
             back_func: calls back function
     """
     while True:
+        clear()
+        if worksheet == 'patterns':
+            show_worksheet(worksheet)
+        elif worksheet == 'yarns':
+            show_worksheet(worksheet)
+        elif worksheet == 'hooks':
+            show_worksheet(worksheet)
+
         print(f'\n1. Add a {str}')
         print(f'2. Remove last added {str}')
         print(f'3. Go back to main menu')
@@ -196,6 +204,12 @@ def sub_menu(str, add_func, remove_func):
             print('Invalid option, please eneter a number from 1, 2, or 3\n')
             input('Press Enter to continue...\n')
 
+def clear():
+    """
+    clears the terminal
+    """
+    print('\033c')
+
 
 def main_menu():
     """
@@ -203,6 +217,7 @@ def main_menu():
     """
 
     while True:
+        clear()
         print('Welcome to Yarn Genie! Your Magical Database for '
             'Crochet Patterns, Yarns and Hooks\n')
         print('1. View your patterns pieces.')
@@ -214,14 +229,11 @@ def main_menu():
         user_input = input('\nPlease select an option by entering a number from 1 - 5\n')
 
         if user_input == '1':
-            show_worksheet('patterns')
-            sub_menu('pattern', get_user_data, remove_from_worksheet)
+            sub_menu('pattern','patterns', get_user_data, remove_from_worksheet)
         elif user_input == '2':
-            show_worksheet('yarns')
-            sub_menu('yarn', get_user_data, remove_from_worksheet)
+            sub_menu('yarn', 'yarns', get_user_data, remove_from_worksheet)
         elif user_input == '3':
-            show_worksheet('hooks')
-            sub_menu('hook', get_user_data, remove_from_worksheet)
+            sub_menu('hook', 'hooks', get_user_data, remove_from_worksheet)
         elif user_input == '4':
             print('call function calculate')
         elif user_input == '5':
