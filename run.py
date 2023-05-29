@@ -57,7 +57,7 @@ def get_user_data(type, num):
         print(f'\nInformation should be {num} categories, separate by commas.')
 
         if type == 'pattern':
-            print(f'{type.capitalize()} Name, Yarn Weight, Yarn Length (m), Hook Size\n')
+            print(f'\n{type.capitalize()} Name, Yarn Weight, Yarn Length (m), Hook Size')
             print('Example: Kids Gloves, Double Knit, 400, 3.00\n')
 
             pattern_data = input(f'Enter your {type} information here '
@@ -73,7 +73,7 @@ def get_user_data(type, num):
                 add_to_worksheet(pattern_info, 'patterns')
 
         elif type == 'yarn':
-            print(f'{type.capitalize()} Name, Material, {type.capitalize()} Weight, {type.capitalize()} Length, Colour, Quantity\n')
+            print(f'\n{type.capitalize()} Name, Material, {type.capitalize()} Weight, {type.capitalize()} Length, Colour, Quantity')
             print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
 
             yarn_data = input(f'Enter your {type} information here '
@@ -89,7 +89,7 @@ def get_user_data(type, num):
                 add_to_worksheet(yarn_info, 'yarns')
 
         elif type == 'hook':
-            print(f'{type.capitalize()} Size, Owned\n')
+            print(f'\n{type.capitalize()} Size, Owned')
             print('Example: 6.00, True\n')
             
             hook_data = input(f'Enter your {type} information here '
@@ -153,7 +153,7 @@ def validate_hook(values):
     """
     try:
         # convert data at 1st index to be boolean
-        values[1] = bool(values[1])
+        boolean_value = bool(values[1])
 
         if len(values) != 2:
             raise ValueError(
@@ -173,6 +173,7 @@ def sub_menu(str, worksheet, add_func, remove_func):
     
         Arguments:
             str: title of the submenu (patterns/yarns/hooks)
+            worksheet: name of the worksheet on the spreadsheet
             add_func: calls add_function
             back_func: calls back function
     """
