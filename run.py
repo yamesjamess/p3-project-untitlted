@@ -16,6 +16,12 @@ patterns = SHEET.worksheet('patterns')
 data = patterns.get_all_values()
 
 
+def clear():
+    """
+    clears the terminal
+    """
+    print('\033c')
+
 # Worksheet Manipulation Section
 def show_worksheet(worksheet):
     """
@@ -183,10 +189,40 @@ def validate_hook(values):
 
     return True
 
+# Calculation functions
+
+def calculate():
+    """
+    Takes user input selection of pattern, then compare it against yarn and 
+    hook stock to see if the user meet the requirement to make that pattern
+    or not.
+    """
+    pattern = SHEET.worksheet('patterns')
+    row = pattern.row_values(2)
+    print(f'You have selected a {row[0]} pattern!\n')
+    print(f'You will need a {row[1]} weighted yarn with the total length of {row[2]}m, and a size {row[3]}mm hook.\n')
+    
+    #this part does the calculation if you have the same weight yarn
+    #if you have enough length
+    #if you have the same size hook
+
+
+def calc_menu():
+    """
+    Display pattern selection and and back calculation sub menu until the user
+    select a valid option, then calls the requested function
+    """
+
+    while True:
+        clear()
+        show_worksheet('patterns')
+
+# calculate()
+calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
-    Display add and back sub menu until the user select a valid option
+    Display add, remove, and back sub menu until the user select a valid option
     then calls the requested funcion
     
         Arguments:
@@ -229,12 +265,6 @@ def sub_menu(str, worksheet, add_func, remove_func):
         else:
             print('Invalid option, please eneter a number from 1, 2, or 3\n')
             input('Press Enter to continue...\n')
-
-def clear():
-    """
-    clears the terminal
-    """
-    print('\033c')
 
 
 def art():
@@ -279,4 +309,4 @@ def main_menu():
             print('Invalid option, please eneter a number from 1 - 5\n')
             input('Press Enter to continue...\n')
 
-main_menu()
+# main_menu()
