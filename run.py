@@ -30,9 +30,15 @@ def show_worksheet(worksheet):
     clear()
     print(f'You have the following {worksheet} in your stash!\n')
     stash = SHEET.worksheet(worksheet).get_all_values()
+    
+    # for i, row in enumerate(stash):
+    #     if i == 0:
+    #         # inject '' as the first item in the list
+    #     else:
+    #         inject str(i)
     print(tabulate(stash))
 
-
+show_worksheet('patterns')
 def add_to_worksheet(data, worksheet):
     """
     Update relevant worksheet, add new row with list data provided.
@@ -59,6 +65,7 @@ def remove_last_item(worksheet):
     while True:
         if user_input.upper() == 'Y' or user_input.upper() == 'YES':
             print('\nRemoving last item from your list...')
+            
             print('\nItem removed!')
             input('\nPress Enter to continue...')
             break
@@ -218,7 +225,7 @@ def calc_menu():
         show_worksheet('patterns')
 
 # calculate()
-calc_menu()
+# calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
