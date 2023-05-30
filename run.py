@@ -30,15 +30,19 @@ def show_worksheet(worksheet):
     clear()
     print(f'You have the following {worksheet} in your stash!\n')
     stash = SHEET.worksheet(worksheet).get_all_values()
-    
-    # for i, row in enumerate(stash):
-    #     if i == 0:
-    #         # inject '' as the first item in the list
-    #     else:
-    #         inject str(i)
+    num = 0
+
+    for index, row in enumerate(stash):
+        if index == 0:
+            row.insert(0, '')
+        else:
+            row.insert(0, index)
+
     print(tabulate(stash))
 
-show_worksheet('patterns')
+show_worksheet('yarns')
+
+
 def add_to_worksheet(data, worksheet):
     """
     Update relevant worksheet, add new row with list data provided.
