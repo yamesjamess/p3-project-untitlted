@@ -40,9 +40,6 @@ def show_worksheet(worksheet):
 
     print(tabulate(stash))
 
-show_worksheet('yarns')
-
-
 def add_to_worksheet(data, worksheet):
     """
     Update relevant worksheet, add new row with list data provided.
@@ -58,28 +55,30 @@ def add_to_worksheet(data, worksheet):
         show_worksheet(worksheet)
 
 
-def remove_last_item(worksheet):
+def remove_item(worksheet):
     """
-    Remove the last row in the relevant worksheet.
+    Remove the an row the user has selected from the relevant worksheet.
     """
-    print(f'\nDo you want to remove the last time from your {worksheet} list?\n')
+    #remove after testing
+    show_worksheet(worksheet)
+
+    print(f'\nWhich item do you want to from your {worksheet} list?\n')
     worksheet_to_remove = SHEET.worksheet(worksheet)
-    user_input = input('Enter Y/N to confirm...\n')
+    user_input = input('Enter a number or enter "x" to cancel...\n')
 
     while True:
-        if user_input.upper() == 'Y' or user_input.upper() == 'YES':
-            print('\nRemoving last item from your list...')
-            
-            print('\nItem removed!')
-            input('\nPress Enter to continue...')
-            break
-        elif user_input.upper() == 'N' or user_input.upper() == 'NO':
+        if user_input.upper() == 'X':
             print('\nRetuning to the sub-menu')
-            input('\nPress Enter to continue...')
+            break
+        elif user_input.isdigit():
+            index = int(user_input)
+            index +=1
+            worksheet_to_remove.delete_rows(index)
+            print(f'\nItem {user_input} has been removed!')
             break
         else:
             print('\nInvalid option, please try again...')
-            user_input = input('Enter Y/N to confirm...\n')
+            user_input = input('Enter a number or enter "x" to cancel...\n')
 
 
 # User input section
@@ -252,7 +251,7 @@ def sub_menu(str, worksheet, add_func, remove_func):
             show_worksheet(worksheet)
 
         print(f'\n1. Add a {str}')
-        print(f'2. Remove last added {str}')
+        print(f'2. Remove a {str}')
         print(f'3. Go back to main menu')
 
         user_input = input('\nPlease select an option by entering a number from 1, 2, or 3\n')
@@ -266,11 +265,11 @@ def sub_menu(str, worksheet, add_func, remove_func):
                 get_user_data('hook', 2)
         elif user_input == '2':
             if str == 'pattern':
-                remove_last_item('patterns')
+                remove_item('patterns')
             elif str == 'yarn':
-                remove_last_item('yarns')
+                remove_item('yarns')
             elif str == 'hook':
-                remove_last_item('hooks')
+                remove_item('hooks')
         elif user_input == '3':
             break
         else:
@@ -295,7 +294,7 @@ def main_menu():
     while True:
         clear()
         art()
-        print('Welcome to Yarn Genie! Your Magical Database for '
+        print('Welcome to Yarn Genie! A Magical Database for '
             'Crochet Patterns, Yarns and Hooks!\n')
         print('1. View your patterns pieces.')
         print('2. View your yarn stash.')
@@ -306,11 +305,11 @@ def main_menu():
         user_input = input('\nPlease select an option by entering a number from 1 - 5\n')
 
         if user_input == '1':
-            sub_menu('pattern','patterns', get_user_data, remove_last_item)
+            sub_menu('pattern','patterns', get_user_data, remove_item)
         elif user_input == '2':
-            sub_menu('yarn', 'yarns', get_user_data, remove_last_item)
+            sub_menu('yarn', 'yarns', get_user_data, remove_item)
         elif user_input == '3':
-            sub_menu('hook', 'hooks', get_user_data, remove_last_item)
+            sub_menu('hook', 'hooks', get_user_data, remove_item)
         elif user_input == '4':
             print('call function calculate')
         elif user_input == '5':
@@ -319,5 +318,6 @@ def main_menu():
         else:
             print('Invalid option, please eneter a number from 1 - 5\n')
             input('Press Enter to continue...\n')
+
 
 # main_menu()
