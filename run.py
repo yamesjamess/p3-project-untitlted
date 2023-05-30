@@ -214,11 +214,27 @@ def calculate():
     hook stock to see if the user meet the requirement to make that pattern
     or not.
     """
+    show_worksheet('patterns')
     pattern = SHEET.worksheet('patterns')
-    row = pattern.row_values(2)
-    print(f'You have selected a {row[0]} pattern!\n')
-    print(f'You will need a {row[1]} weighted yarn with the total length of {row[2]}m, and a size {row[3]}mm hook.\n')
+
+    selected_row = input('\nPlease enter a number to select a pattern or press '
+                        '"x" to return to the main menu\n')
     
+    while True:
+        if selected_row.upper() == 'X':
+            print('\nReturning to the main menu')
+            input('\nPress Enter to continue...\n')
+            break
+        elif selected_row.isdigit():
+            row = int(selected_row)
+            row += 1
+            data = pattern.row_values(row)
+            print(f'\nYou have selected a {data[0]} pattern!\n')
+            print(f'You will need a {data[1]} weighted yarn with the total ')
+            print(f'legnth of {data[2]}m, and a size {data[3]}mm hook.\n')
+            input('Press Enter to continue...\n')
+            break
+
     #this part does the calculation if you have the same weight yarn
     #if you have enough length
     #if you have the same size hook
@@ -234,7 +250,7 @@ def calc_menu():
         clear()
         show_worksheet('patterns')
 
-# calculate()
+calculate()
 # calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
@@ -327,4 +343,4 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-main_menu()
+# main_menu()
