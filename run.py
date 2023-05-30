@@ -57,7 +57,7 @@ def add_to_worksheet(data, worksheet):
 
 def remove_item(worksheet):
     """
-    Remove the an row the user has selected from the relevant worksheet.
+    Remove a row the user has selected from the relevant worksheet.
     """
     #remove after testing
     show_worksheet(worksheet)
@@ -68,13 +68,15 @@ def remove_item(worksheet):
 
     while True:
         if user_input.upper() == 'X':
-            print('\nRetuning to the sub-menu')
+            print('\nReturning to the sub-menu')
+            input('\nPress Enter to continue...\n')
             break
         elif user_input.isdigit():
             index = int(user_input)
             index +=1
             worksheet_to_remove.delete_rows(index)
             print(f'\nItem {user_input} has been removed!')
+            input('\nPress Enter to continue...\n')
             break
         else:
             print('\nInvalid option, please try again...')
@@ -159,6 +161,7 @@ def validate_pattern(values):
 
     return True
 
+
 def validate_yarn(values):
     """
     Convert the 3rd and 5th index into integers.
@@ -181,6 +184,7 @@ def validate_yarn(values):
 
     return True
 
+
 def validate_hook(values):
     """
     Check if user has input the correct values for hooks
@@ -199,8 +203,8 @@ def validate_hook(values):
 
     return True
 
-# Calculation functions
 
+# Calculation functions
 def calculate():
     """
     Takes user input selection of pattern, then compare it against yarn and 
@@ -320,4 +324,4 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-# main_menu()
+main_menu()
