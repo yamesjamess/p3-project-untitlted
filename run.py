@@ -50,7 +50,13 @@ def add_to_worksheet(data, worksheet):
     print(f'{worksheet} worksheet updated successfully!\n')
     input('Press Enter to add another item...\n')
 
-    if worksheet == 'yarns':
+    if worksheet == 'patterns':
+        clear()
+        show_worksheet(worksheet)
+    elif worksheet == 'yarns':
+        clear()
+        show_worksheet(worksheet)
+    elif worksheet == 'hooks':
         clear()
         show_worksheet(worksheet)
 
@@ -59,9 +65,6 @@ def remove_item(worksheet):
     """
     Remove a row the user has selected from the relevant worksheet.
     """
-    #remove after testing
-    show_worksheet(worksheet)
-
     print(f'\nWhich item do you want to from your {worksheet} list?\n')
     worksheet_to_remove = SHEET.worksheet(worksheet)
     user_input = input('Enter a number or enter "x" to cancel...\n')
