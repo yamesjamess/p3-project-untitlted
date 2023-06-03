@@ -341,7 +341,7 @@ def main_menu():
         elif user_input == '3':
             sub_menu('hook', 'hooks', get_user_data, remove_item)
         elif user_input == '4':
-            print('call function calculate')
+            calc_menu()
         elif user_input == '5':
             print('Goodbye and stitch you later!')
             break
