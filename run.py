@@ -212,17 +212,51 @@ def validate_hook(values):
 
 # Calculation functions
 def calculate():
+    clear()
     """
     Takes user input selection of pattern, then compare it against yarn and 
     hook stock to see if the user meet the requirement to make that pattern
     or not.
     """
-    print('calculating!')
+    pattern = SHEET.worksheet('patterns')
+
+    data = pattern.row_values(2)
+
+    yarn = SHEET.worksheet('yarns')
+    yarn_weight = yarn.col_values(3)
+    yarn_length = yarn.col_values(4)
+    yarn_quantity = yarn.col_values(6)
+    yarn_weight.pop(0)
+    yarn_length.pop(0)
+    yarn_quantity.pop(0)
+    
+    
+    # my_list = list(set(my_list))
+
+    print('Calculating...')
+
+    print(yarn_weight)
+
+    # print(data[1])
+
+    # if data[1].lower() in [item.lower() for item in yarn_weight]:
+    #     print(f'{data[1]} exist')
+    # else:
+    #     print(f'{data[1]} does not exist')
+
     
    
 
     #this part does the calculation if you have the same weight yarn
-    #if you have enough length
+
+    if data[1].lower() in [item.lower() for item in yarn_weight]:
+        # if you have enough length
+        if 
+        print(f'{data[1]} exist')
+    else:
+        print(f'{data[1]} does not exist')
+
+    
     #if you have the same size hook
 
 
@@ -257,8 +291,8 @@ def calc_menu():
             print('\nInvalid option, please try again...')
             selected_row = input('Enter a number or enter "x" to cancel...\n')
 
-# calculate()
-calc_menu()
+calculate()
+# calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
