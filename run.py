@@ -74,13 +74,16 @@ def remove_item(worksheet):
             print('\nReturning to the sub-menu')
             input('\nPress Enter to continue...\n')
             break
-        elif user_input.isdigit():
+        elif user_input.isdigit() and user_input != '0':
             index = int(user_input)
             index +=1
             worksheet_to_remove.delete_rows(index)
             print(f'\nItem {user_input} has been removed!')
             input('\nPress Enter to continue...\n')
             break
+        elif user_input == '0':
+            print('\nInvalid option, please try again...')
+            user_input = input('Enter a number or enter "x" to cancel...\n')
         else:
             print('\nInvalid option, please try again...')
             user_input = input('Enter a number or enter "x" to cancel...\n')
@@ -250,7 +253,7 @@ def calc_menu():
         clear()
         show_worksheet('patterns')
 
-calculate()
+# calculate()
 # calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
@@ -343,4 +346,4 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-# main_menu()
+main_menu()
