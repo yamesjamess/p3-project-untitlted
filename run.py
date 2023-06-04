@@ -109,7 +109,7 @@ def get_user_data(type, num):
                 show_worksheet('patterns')
                 return []
 
-            pattern_info = pattern_data.split(',')
+            pattern_info = [value.strip() for value in pattern_data.split(',')]
             if validate_pattern(pattern_info):
                 print('\nInformation is valid!\n')
                 add_to_worksheet(pattern_info, 'patterns')
@@ -125,7 +125,7 @@ def get_user_data(type, num):
                 show_worksheet('yarns')
                 return []
 
-            yarn_info = yarn_data.split(',')
+            yarn_info = [value.strip() for value in yarn_data.split(',')]
             if validate_yarn(yarn_info):
                 print('\nInformation is valid!\n')
                 add_to_worksheet(yarn_info, 'yarns')
@@ -142,7 +142,7 @@ def get_user_data(type, num):
                 show_worksheet('hooks')
                 return []
 
-            hook_info = hook_data.split(',')
+            hook_info = [value.strip() for value in hook_data.split(',')]
             if validate_hook(hook_info):
                 print('\nInformation is valid!\n')
                 add_to_worksheet(hook_info, 'hooks')
