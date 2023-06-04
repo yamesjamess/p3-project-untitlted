@@ -211,21 +211,31 @@ def validate_hook(values):
 
 
 # Calculation functions
-def calculate():
-    clear()
+def calculate(user_input):
+    # clear()
     """
     Takes user input selection of pattern, then compare it against yarn and 
     hook stock to see if the user meet the requirement to make that pattern
     or not.
     """
-    pattern = SHEET.worksheet('patterns')
+    patterns = SHEET.worksheet('patterns')
+    yarns = SHEET.worksheet('yarns')
+    hooks = SHEET.worksheet('hooks')
 
-    data = pattern.row_values(2)
+    hooks_size = hooks.col_values(1)
+    hooks_size.pop(0)
 
-    yarn = SHEET.worksheet('yarns')
-    yarn_weight = yarn.col_values(3)
-    yarn_length = yarn.col_values(4)
-    yarn_quantity = yarn.col_values(6)
+    if user_input[3] in hooks_size:
+        print(f'You have {user_input[3]}mm hook to make this project!\n')
+    else:
+        print(f'This pattern require a {user_input[3]}mm hook, ' 
+            'you dont have the hook. Go buy some!')
+
+
+
+    yarn_weight = yarns.col_values(3)
+    yarn_length = yarns.col_values(4)
+    yarn_quantity = yarns.col_values(6)
     yarn_weight.pop(0)
     yarn_length.pop(0)
     yarn_quantity.pop(0)
@@ -233,28 +243,24 @@ def calculate():
     
     # my_list = list(set(my_list))
 
-    print('Calculating...')
+    print('Calculating...\n')
 
-    print(yarn_weight)
+    print(user_input)
 
-    # print(data[1])
 
-    # if data[1].lower() in [item.lower() for item in yarn_weight]:
-    #     print(f'{data[1]} exist')
-    # else:
-    #     print(f'{data[1]} does not exist')
+
 
     
    
 
     #this part does the calculation if you have the same weight yarn
 
-    if data[1].lower() in [item.lower() for item in yarn_weight]:
-        # if you have enough length
-        if 
-        print(f'{data[1]} exist')
-    else:
-        print(f'{data[1]} does not exist')
+    # if data[1].lower() in [item.lower() for item in yarn_weight]:
+    #     # if you have enough length
+    #     if:
+    #     print(f'{data[1]} exist')
+    # else:
+    #     print(f'{data[1]} does not exist')
 
     
     #if you have the same size hook
@@ -285,14 +291,14 @@ def calc_menu():
             print(f'You will need a {data[1]} weighted yarn with the total ')
             print(f'legnth of {data[2]}m, and a size {data[3]}mm hook.\n')
             input('Press Enter to continue...\n')
-            calculate()
+            calculate(data)
             break
         else:
             print('\nInvalid option, please try again...')
             selected_row = input('Enter a number or enter "x" to cancel...\n')
 
-calculate()
-# calc_menu()
+# calculate()
+calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
