@@ -175,15 +175,15 @@ def validate_yarn(values):
     or if there aren't exactly 6 values.
     """
     try:
-        # convert data at 3rd and 5th indices into intergers
-        indices = [3, 5]
-        for index in indices:
-            values[index] = int(values[index])
-
         if len(values) != 6:
             raise ValueError(
                 f'6 values required, you provided {len(values)}'    
             )
+        
+            # convert data at 3rd and 5th indices into intergers
+            indices = [3, 5]
+            for index in indices:
+                values[index] = int(values[index])
     except ValueError as e:
         print(f'Invalid data: {e}, please try again.\n')
         return False
@@ -196,13 +196,13 @@ def validate_hook(values):
     Check if user has input the correct values for hooks
     """
     try:
-        # convert data at 1st index to be boolean
-        boolean_value = bool(values[1])
-
         if len(values) != 2:
             raise ValueError(
                 f'2 values required, you provided {len(values)}'    
             )
+
+            # convert data at 1st index to be boolean
+            boolean_value = bool(values[1])
     except ValueError as e:
         print(f'Invalid data: {e}, please try again.\n')
         return False
@@ -298,7 +298,7 @@ def calc_menu():
             selected_row = input('Enter a number or enter "x" to cancel...\n')
 
 # calculate()
-calc_menu()
+# calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
@@ -390,4 +390,4 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-# main_menu()
+main_menu()
