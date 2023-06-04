@@ -95,15 +95,16 @@ def get_user_data(type, num):
     Get pattern/yarn/hook information input from user
     """
     while True:
-        print(f'\nPlease enter your {type} information.')
-        print(f'\nInformation should be {num} categories, separate by commas.')
+        if type == 'pattern' or type == 'yarn':
+            print(f'\nPlease enter your {type} information.')
+            print(f'\nInformation should be {num} categories, separate by commas.')
 
         if type == 'pattern':
             print(f'\n{type.capitalize()} Name, Yarn Weight, Yarn Length (m), Hook Size')
             print('Example: Kids Gloves, Double Knit, 400, 3.00\n')
 
             pattern_data = input(f'Enter your {type} information here '
-                                'or enter "x" to return to sub-menu: \n')
+                                'or enter "x" to return to sub-menu:\n')
             if pattern_data.upper() == 'X':
                 print('Returning to sub-menu\n')
                 show_worksheet('patterns')
@@ -119,7 +120,7 @@ def get_user_data(type, num):
             print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
 
             yarn_data = input(f'Enter your {type} information here '
-                                'or enter "x" to return to sub-menu: \n')
+                                'or enter "x" to return to sub-menu:\n')
             if yarn_data.upper() == 'X':
                 print('Returning to sub-menu\n')
                 show_worksheet('yarns')
@@ -131,11 +132,14 @@ def get_user_data(type, num):
                 add_to_worksheet(yarn_info, 'yarns')
 
         elif type == 'hook':
-            print(f'\n{type.capitalize()} Size, Owned')
-            print('Example: 6.00, True\n')
+            print(f'\nPlease enter your {type} information.')
+            print(f'\nInformation should be {num} category.')
+            print(f"\nNote: Only add hooks that you've owned!")
+            print(f'\n{type.capitalize()} Size')
+            print('Example: 6.00\n')
             
             hook_data = input(f'Enter your {type} information here '
-                                'or enter "x" to return to sub-menu: \n')
+                                'or enter "x" to return to sub-menu:\n')
 
             if hook_data.upper() == 'X':
                 print('Returning to sub-menu\n')
@@ -193,16 +197,13 @@ def validate_yarn(values):
 
 def validate_hook(values):
     """
-    Check if user has input the correct values for hooks
+    Check if user has input the correct values for hooks3
     """
     try:
-        if len(values) != 2:
+        if len(values) != 1:
             raise ValueError(
-                f'2 values required, you provided {len(values)}'    
+                f'1 values required, you provided {len(values)}'    
             )
-
-            # convert data at 1st index to be boolean
-            boolean_value = bool(values[1])
     except ValueError as e:
         print(f'Invalid data: {e}, please try again.\n')
         return False
@@ -218,11 +219,17 @@ def calculate(user_input):
     hook stock to see if the user meet the requirement to make that pattern
     or not.
     """
-    patterns = SHEET.worksheet('patterns')
-    yarns = SHEET.worksheet('yarns')
-    hooks = SHEET.worksheet('hooks')
-
-    hooks_size = hooks.col_values(1)
+    yarns_data = SHEET.worksheet('yarns')
+    yarn_weight = yarns_data.col_values(3)
+    yarn_length = yarns_data.col_values(4)
+    yarn_quantity = yarns_data.col_values(6)
+    yarn_weight.pop(0)
+    yarn_length.pop(0)
+    yarn_quantity.pop(0)
+    
+    
+    hooks_data = SHEET.worksheet('hooks')
+    hooks_size = hooks_data.col_values(1)
     hooks_size.pop(0)
 
     if user_input[3] in hooks_size:
@@ -230,18 +237,6 @@ def calculate(user_input):
     else:
         print(f'This pattern require a {user_input[3]}mm hook, ' 
             'you dont have the hook. Go buy some!')
-
-
-
-    yarn_weight = yarns.col_values(3)
-    yarn_length = yarns.col_values(4)
-    yarn_quantity = yarns.col_values(6)
-    yarn_weight.pop(0)
-    yarn_length.pop(0)
-    yarn_quantity.pop(0)
-    
-    
-    # my_list = list(set(my_list))
 
     print('Calculating...\n')
 
@@ -332,7 +327,7 @@ def sub_menu(str, worksheet, add_func, remove_func):
             elif str == 'yarn':
                 get_user_data('yarn', 6)
             elif str == 'hook':
-                get_user_data('hook', 2)
+                get_user_data('hook', 1)
         elif user_input == '2':
             if str == 'pattern':
                 remove_item('patterns')
