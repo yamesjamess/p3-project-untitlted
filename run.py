@@ -334,6 +334,8 @@ def calc_menu():
 
     show_worksheet('patterns')
     pattern = SHEET.worksheet('patterns')
+    patterns_list = pattern.get_all_values()
+    patterns_list.pop(0)
 
     selected_row = input('\nPlease enter a number to select a pattern or enter '
                         '"x" to return to the main menu\n').strip()
@@ -343,7 +345,8 @@ def calc_menu():
             print('\nReturning to the main menu')
             input('\nPress Enter to continue...\n')
             break
-        elif selected_row.isdigit() and selected_row != '0':
+        elif selected_row.isdigit() and (0 < int(selected_row) <= 
+            len(patterns_list)):
             row = int(selected_row)
             row += 1
             data = pattern.row_values(row)
