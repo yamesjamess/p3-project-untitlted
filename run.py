@@ -249,38 +249,45 @@ def calculate(user_input):
         #asking the user to select which yarn they want to use 
         #from the list above
         while True:
-            selected_yarn = int(input('Enter the yarn number you want to use (1, 2,'
-                ' etc.): \n').strip())
-            selected_yarn -= 1
+            try:
+                selected_yarn = int(input('Enter the yarn number you want to use (1, 2,'
+                    ' etc.): \n').strip())
+                selected_yarn -= 1
 
-            #print out the user's selection
-            if selected_yarn >= 0 and selected_yarn < len(matched_lists):
-                selected_yarn_data = matched_lists[selected_yarn]
-                print(f"\nYou've selected a {selected_yarn_data[1]} " 
-                    f"{selected_yarn_data[2]} yarn by " 
-                    f"{selected_yarn_data[0]}'s in "
-                    f"{selected_yarn_data[4]} colourway\n"
-                    )
-                total_yarn_length = int(selected_yarn_data[3]) * int(selected_yarn_data[5])
-                #when user have more yarn than pattern requires
-                if total_yarn_length > int(user_input[2]):
-                    print('Congratulations! You have enough yarn to make '
-                        'this project!\n')
-                    input('Press Enter to go back to main menu...\n')
-                    break
-                #when user does not have enough yarn legnth
-                elif total_yarn_length < int(user_input[2]):
-                    remaining_yarn = int(user_input[2]) - total_yarn_length
-                    additional_ball = (remaining_yarn + int(selected_yarn_data[3]) - 1) // int(selected_yarn_data[3])
+                #print out the user's selection
+                if selected_yarn >= 0 and selected_yarn < len(matched_lists):
+                    selected_yarn_data = matched_lists[selected_yarn]
+                    print(f"\nYou've selected a {selected_yarn_data[1]} " 
+                        f"{selected_yarn_data[2]} yarn by " 
+                        f"{selected_yarn_data[0]}'s in "
+                        f"{selected_yarn_data[4]} colourway\n"
+                        )
+                    total_yarn_length = (int(selected_yarn_data[3]) * 
+                        int(selected_yarn_data[5]))
+                    #when user have more yarn than pattern requires
+                    if total_yarn_length > int(user_input[2]):
+                        print('Congratulations! You have enough yarn to make '
+                            'this project!\n')
+                        input('Press Enter to go back to main menu...\n')
+                        break
+                    #when user does not have enough yarn legnth
+                    elif total_yarn_length < int(user_input[2]):
+                        remaining_yarn = int(user_input[2]) - total_yarn_length
+                        additional_ball = ((remaining_yarn + 
+                            int(selected_yarn_data[3]) - 1) 
+                            // int(selected_yarn_data[3]))
 
-                    print(f'You have {selected_yarn_data[5]} ball(s) of '
-                        f'{selected_yarn_data[3]}m yarn. You would need '
-                        f'{additional_ball} more ball(s) ' 
-                        'more to make this project. Go and buy some more!\n')
-                    input('Press Enter to go back to main menu...\n')
-                    break
-            else:
-                print("Invalid number. Please try again.\n")
+                        print(f'You have {selected_yarn_data[5]} ball(s) of '
+                            f'{selected_yarn_data[3]}m yarn. You would need '
+                            f'{additional_ball} more ball(s) ' 
+                            'more to make this project. Go and buy some more!\n')
+                        input('Press Enter to go back to main menu...\n')
+                        break
+                else:
+                    print("Invalid option. Please try again.\n")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
 
     # if there are only 1 match
     elif len(matched_lists) <= 1 and len(matched_lists) != 0:
@@ -296,13 +303,15 @@ def calculate(user_input):
             print('Congratulations! You have enough yarn to make '
                 'this project!\n')
             print(f"The yarn you will be using is {yarn_data[0]}'s "
-                f"{yarn_data[2]} {yarn_data[1]} yarn in {yarn_data[4]} colourway.\n")
+                f"{yarn_data[2]} {yarn_data[1]} yarn in "
+                f"{yarn_data[4]} colourway.\n")
             input('Press Enter to go back to main menu...\n')
             return #recode to return to menu
         #when user does not have enough yarn legnth
         elif total_yarn_length < int(user_input[2]):
             remaining_yarn = int(user_input[2]) - total_yarn_length
-            additional_ball = (remaining_yarn + int(yarn_data[3]) - 1) // int(yarn_data[3])
+            additional_ball = ((remaining_yarn + int(yarn_data[3]) - 1) // 
+                int(yarn_data[3]))
 
             print(f'You have {yarn_data[5]} ball(s) of '
                 f'{yarn_data[3]}m yarn. You would need '
@@ -350,6 +359,7 @@ def calc_menu():
             selected_row = input('Enter a number or enter "x"'
                 ' to cancel...\n').strip()
 
+calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
@@ -443,5 +453,5 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-if __name__ == "__main__":
-    main_menu()
+# if __name__ == "__main__":
+#     main_menu()
