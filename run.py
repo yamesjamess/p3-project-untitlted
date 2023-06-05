@@ -1,4 +1,5 @@
 import gspread
+import math
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 
@@ -219,46 +220,97 @@ def calculate(user_input):
     hook stock to see if the user meet the requirement to make that pattern
     or not.
     """
-    yarns_data = SHEET.worksheet('yarns')
-    yarn_weight = yarns_data.col_values(3)
-    yarn_length = yarns_data.col_values(4)
-    yarn_quantity = yarns_data.col_values(6)
-    yarn_weight.pop(0)
-    yarn_length.pop(0)
-    yarn_quantity.pop(0)
-    
-    
+    yarns_data = SHEET.worksheet('yarns').get_all_values()
+    yarns_data.pop(0)
+    header_removed = yarns_data
+
     hooks_data = SHEET.worksheet('hooks')
     hooks_size = hooks_data.col_values(1)
     hooks_size.pop(0)
 
+    print('Calculating...\n')
+
+    #check if the user has the hook required for the project
     if user_input[3] in hooks_size:
         print(f'You have {user_input[3]}mm hook to make this project!\n')
     else:
-        print(f'This pattern require a {user_input[3]}mm hook, ' 
-            'you dont have the hook. Go buy some!')
+        print(f'This pattern requires a {user_input[3]}mm hook, ' 
+            'you do not have the hook. Go buy some hook!\n')
 
-    print('Calculating...\n')
+    #checks if there are more than 1 yarn that matches the same weight
+    #the user has selected
+    matched_lists = [lst for lst in yarns_data if lst[2] == user_input[1]]
+    #if there are more than 1 matches
+    if len(matched_lists) > 1:
+        print(f'You have more than 1 of {user_input[1]} yarn, ' 
+            'please select a yarn you want to use\n')
+        for i, lst in enumerate(matched_lists):
+            print(f"Yarn {i+1}: {lst}")
 
-    print(user_input)
+        #asking the user to select which yarn they want to use 
+        #from the list above
+        while True:
+            selected_yarn = int(input('Enter the yarn number you want to use (1, 2,'
+                ' etc.): \n'))
+            selected_yarn -= 1
 
+            #print out the user's selection
+            if selected_yarn >= 0 and selected_yarn < len(matched_lists):
+                selected_yarn_data = matched_lists[selected_yarn]
+                print(f"\nYou've selected a {selected_yarn_data[1]} " 
+                    f"{selected_yarn_data[2]} yarn by " 
+                    f"{selected_yarn_data[0]}'s in "
+                    f"{selected_yarn_data[4]} colourway\n"
+                    )
+                total_yarn_length = int(selected_yarn_data[3]) * int(selected_yarn_data[5])
+                #when user have more yarn than pattern requires
+                if total_yarn_length > int(user_input[2]):
+                    print('Congratulations! You have enough yarn to make '
+                        'this project!\n')
+                    break #recode to return to menu
+                #when user does not have enough yarn legnth
+                elif total_yarn_length < int(user_input[2]):
+                    remaining_yarn = int(user_input[2]) - total_yarn_length
+                    additional_ball = (remaining_yarn + int(selected_yarn_data[3]) - 1) // int(selected_yarn_data[3])
 
+                    print(f'You have {selected_yarn_data[5]} ball(s) of '
+                        f'{selected_yarn_data[3]}m yarn. You would need '
+                        f'{additional_ball} more ball(s) ' 
+                        'more to make this project. Go and buy some more!\n')
+                    break #recode to return to menu
+            else:
+                print("Invalid number. Please try again.\n")
 
+    # if there are only 1 match
+    elif len(matched_lists) <= 1 and len(matched_lists) != 0:
+        #matched_lists is a nested list
+        #this turns it into a flat list for ease of computation
+        yarn_data=[]
+        for sublist in matched_lists:
+            yarn_data.extend(sublist)
 
-    
-   
+        total_yarn_length = int(yarn_data[3]) * int(yarn_data[5])
+        #when user have more yarn than pattern requires
+        if total_yarn_length > int(user_input[2]):
+            print('Congratulations! You have enough yarn to make '
+                'this project!\n')
+            print(f"The yarn you will be using is {yarn_data[0]}'s "
+                f"{yarn_data[2]} {yarn_data[1]} yarn in {yarn_data[4]} colourway.")
+            return #recode to return to menu
+        #when user does not have enough yarn legnth
+        elif total_yarn_length < int(user_input[2]):
+            remaining_yarn = int(user_input[2]) - total_yarn_length
+            additional_ball = (remaining_yarn + int(yarn_data[3]) - 1) // int(yarn_data[3])
 
-    #this part does the calculation if you have the same weight yarn
-
-    # if data[1].lower() in [item.lower() for item in yarn_weight]:
-    #     # if you have enough length
-    #     if:
-    #     print(f'{data[1]} exist')
-    # else:
-    #     print(f'{data[1]} does not exist')
-
-    
-    #if you have the same size hook
+            print(f'You have {yarn_data[5]} ball(s) of '
+                f'{yarn_data[3]}m yarn. You would need '
+                f'{additional_ball} more ball(s) ' 
+                'more to make this project. Go and buy some more yarns!\n')
+            return #recode to return to menu
+    else:
+        print(f"To make this pattern, you'd need {user_input[1]} weight yarn. "
+            "You don't have any of them in your stash. "
+            "You should go and buy some yarns!\n")
 
 
 def calc_menu():
@@ -293,7 +345,7 @@ def calc_menu():
             selected_row = input('Enter a number or enter "x" to cancel...\n')
 
 # calculate()
-# calc_menu()
+calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
@@ -385,4 +437,4 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-main_menu()
+# main_menu()
