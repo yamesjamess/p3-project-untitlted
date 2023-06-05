@@ -266,6 +266,7 @@ def calculate(user_input):
                 if total_yarn_length > int(user_input[2]):
                     print('Congratulations! You have enough yarn to make '
                         'this project!\n')
+                    input('Press Enter to go back to main menu...\n')
                     break #recode to return to menu
                 #when user does not have enough yarn legnth
                 elif total_yarn_length < int(user_input[2]):
@@ -276,6 +277,7 @@ def calculate(user_input):
                         f'{selected_yarn_data[3]}m yarn. You would need '
                         f'{additional_ball} more ball(s) ' 
                         'more to make this project. Go and buy some more!\n')
+                    input('Press Enter to go back to main menu...\n')
                     break #recode to return to menu
             else:
                 print("Invalid number. Please try again.\n")
@@ -294,7 +296,8 @@ def calculate(user_input):
             print('Congratulations! You have enough yarn to make '
                 'this project!\n')
             print(f"The yarn you will be using is {yarn_data[0]}'s "
-                f"{yarn_data[2]} {yarn_data[1]} yarn in {yarn_data[4]} colourway.")
+                f"{yarn_data[2]} {yarn_data[1]} yarn in {yarn_data[4]} colourway.\n")
+            input('Press Enter to go back to main menu...\n')
             return #recode to return to menu
         #when user does not have enough yarn legnth
         elif total_yarn_length < int(user_input[2]):
@@ -305,11 +308,14 @@ def calculate(user_input):
                 f'{yarn_data[3]}m yarn. You would need '
                 f'{additional_ball} more ball(s) ' 
                 'more to make this project. Go and buy some more yarns!\n')
+            input('Press Enter to go back to main menu...\n')
             return #recode to return to menu
     else:
-        print(f"To make this pattern, you'd need {user_input[1]} weight yarn. "
-            "You don't have any of them in your stash. "
+        print(f"To make this pattern, you'd need {user_input[1]} weight yarn.\n"
+            "You don't have any of them in your stash.\n"
             "You should go and buy some yarns!\n")
+        input('Press Enter to go back to main menu...\n')
+        return
 
 
 def calc_menu():
@@ -434,4 +440,5 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-# main_menu()
+if __name__ == "__main__":
+    main_menu()
