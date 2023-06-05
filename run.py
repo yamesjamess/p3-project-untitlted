@@ -1,5 +1,4 @@
 import gspread
-import math
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 
@@ -344,8 +343,6 @@ def calc_menu():
             print('\nInvalid option, please try again...')
             selected_row = input('Enter a number or enter "x" to cancel...\n')
 
-# calculate()
-calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
