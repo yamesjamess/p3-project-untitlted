@@ -250,7 +250,7 @@ def calculate(user_input):
         #from the list above
         while True:
             selected_yarn = int(input('Enter the yarn number you want to use (1, 2,'
-                ' etc.): \n'))
+                ' etc.): \n').strip())
             selected_yarn -= 1
 
             #print out the user's selection
@@ -267,7 +267,7 @@ def calculate(user_input):
                     print('Congratulations! You have enough yarn to make '
                         'this project!\n')
                     input('Press Enter to go back to main menu...\n')
-                    break #recode to return to menu
+                    break
                 #when user does not have enough yarn legnth
                 elif total_yarn_length < int(user_input[2]):
                     remaining_yarn = int(user_input[2]) - total_yarn_length
@@ -278,7 +278,7 @@ def calculate(user_input):
                         f'{additional_ball} more ball(s) ' 
                         'more to make this project. Go and buy some more!\n')
                     input('Press Enter to go back to main menu...\n')
-                    break #recode to return to menu
+                    break
             else:
                 print("Invalid number. Please try again.\n")
 
@@ -328,7 +328,7 @@ def calc_menu():
     pattern = SHEET.worksheet('patterns')
 
     selected_row = input('\nPlease enter a number to select a pattern or enter '
-                        '"x" to return to the main menu\n')
+                        '"x" to return to the main menu\n').strip()
 
     while True:
         if selected_row.upper() == 'X':
@@ -347,7 +347,8 @@ def calc_menu():
             break
         else:
             print('\nInvalid option, please try again...')
-            selected_row = input('Enter a number or enter "x" to cancel...\n')
+            selected_row = input('Enter a number or enter "x"'
+                ' to cancel...\n').strip()
 
 
 def sub_menu(str, worksheet, add_func, remove_func):
@@ -374,7 +375,8 @@ def sub_menu(str, worksheet, add_func, remove_func):
         print(f'2. Remove a {str}')
         print(f'3. Go back to main menu')
 
-        user_input = input('\nPlease select an option by entering a number from 1, 2, or 3\n')
+        user_input = input('\nPlease select an option by '
+            'entering a number from 1, 2, or 3\n').strip()
 
         if user_input == '1':
             if str == 'pattern':
@@ -422,7 +424,8 @@ def main_menu():
         print('4. Calculate what you can make!')
         print('5. Exit')
 
-        user_input = input('\nPlease select an option by entering a number from 1 - 5\n')
+        user_input = input('\nPlease select an option by entering a '
+            'number from 1 - 5\n').strip()
 
         if user_input == '1':
             sub_menu('pattern','patterns', get_user_data, remove_item)
