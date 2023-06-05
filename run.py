@@ -213,7 +213,6 @@ def validate_hook(values):
 
 # Calculation functions
 def calculate(user_input):
-    # clear()
     """
     Takes user input selection of pattern, then compare it against yarn and 
     hook stock to see if the user meet the requirement to make that pattern
@@ -250,7 +249,7 @@ def calculate(user_input):
         #from the list above
         while True:
             try:
-                selected_yarn = int(input('Enter the yarn number you want to use (1, 2,'
+                selected_yarn = int(input('\nEnter the yarn number you want to use (1, 2,'
                     ' etc.): \n').strip())
                 selected_yarn -= 1
 
@@ -359,7 +358,6 @@ def calc_menu():
             selected_row = input('Enter a number or enter "x"'
                 ' to cancel...\n').strip()
 
-calc_menu()
 
 def sub_menu(str, worksheet, add_func, remove_func):
     """
@@ -453,5 +451,5 @@ def main_menu():
             input('Press Enter to continue...\n')
 
 
-# if __name__ == "__main__":
-#     main_menu()
+if __name__ == "__main__":
+    main_menu()
