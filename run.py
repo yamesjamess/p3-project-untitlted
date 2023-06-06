@@ -22,10 +22,16 @@ def clear():
     """
     print('\033c')
 
-# Worksheet Manipulation Section
+# Worksheet Manipulation Functions
 def show_worksheet(worksheet):
     """
     Print out a table of all the values from specific worksheet
+
+    Args:
+        worksheet: string: the name of the worksheet
+
+    Returns:
+        List of lists. Sublist contains row values of worksheet
     """
     clear()
     print(f'You have the following {worksheet} in your stash!\n')
@@ -37,12 +43,16 @@ def show_worksheet(worksheet):
             row.insert(0, '')
         else:
             row.insert(0, index)
-
+    #turn list into table in the termial
     print(tabulate(stash))
 
 def add_to_worksheet(data, worksheet):
     """
     Update relevant worksheet, add new row with list data provided.
+
+    Args:
+        data: list: CSV to be added to worksheet
+        worksheet: string: the name of the worksheet
     """
     print(f'Updating {worksheet} worksheet...\n')
     worksheet_to_update = SHEET.worksheet(worksheet)
@@ -64,6 +74,9 @@ def add_to_worksheet(data, worksheet):
 def remove_item(worksheet):
     """
     Remove a row the user has selected from the relevant worksheet.
+
+    Args:
+        worksheet: string: the name of the worksheet 
     """
     print(f'\nWhich item do you want to from your {worksheet} list?\n')
     worksheet_to_remove = SHEET.worksheet(worksheet)
@@ -89,10 +102,16 @@ def remove_item(worksheet):
             user_input = input('Enter a number or enter "x" to cancel...\n')
 
 
-# User input section
+# User input functions
 def get_user_data(type, num):
     """
     Get pattern/yarn/hook information input from user
+
+    Args:
+        type: string: the name of category of data user want to input
+        num: int: display the length of csv user need to input
+    Returns:
+        list: result of user csv input or blank if the user chose to exit program
     """
     while True:
         if type == 'pattern' or type == 'yarn':
@@ -116,7 +135,9 @@ def get_user_data(type, num):
                 add_to_worksheet(pattern_info, 'patterns')
 
         elif type == 'yarn':
-            print(f'\n{type.capitalize()} Name, Material, {type.capitalize()} Weight, {type.capitalize()} Length, Colour, Quantity')
+            print(f'\n{type.capitalize()} Name, Material, '
+                f'{type.capitalize()} Weight, {type.capitalize()} '
+                'Length, Colour, Quantity')
             print('Example: Rico, Cotton, Double Knit, 200, Teal, 1\n')
 
             yarn_data = input(f'Enter your {type} information here '
@@ -159,6 +180,15 @@ def get_user_data(type, num):
 def validate_pattern(values):
     """
     Check if the patterns input contains exactly 4 values
+
+    Args:
+        values: list: list of csv from get_user_data
+    
+    Returns:
+        boolean: result of validation
+    
+    Raises:
+        ValueError, if value is not equal to 4
     """
     try:
         if len(values) != 4:
@@ -174,9 +204,16 @@ def validate_pattern(values):
 
 def validate_yarn(values):
     """
-    Convert the 3rd and 5th index into integers.
-    Raise ValueError if strings cannot be converted into integers,
-    or if there aren't exactly 6 values.
+    Check if the yarns input contains exactly 6 values
+
+    Args:
+        values: list: list of csv from get_user_data
+    
+    Returns:
+        boolean: result of validation
+    
+    Raises:
+        ValueError, if value is not equal to 6
     """
     try:
         if len(values) != 6:
@@ -197,7 +234,16 @@ def validate_yarn(values):
 
 def validate_hook(values):
     """
-    Check if user has input the correct values for hooks3
+    Check if the patterns input contains exactly 1 values
+
+    Args:
+        values: list: list of csv from get_user_data
+    
+    Returns:
+        boolean: result of validation
+    
+    Raises:
+        ValueError, if value is not equal to 1
     """
     try:
         if len(values) != 1:
@@ -217,6 +263,12 @@ def calculate(user_input):
     Takes user input selection of pattern, then compare it against yarn and 
     hook stock to see if the user meet the requirement to make that pattern
     or not.
+
+    Args:
+        user_input: list: list of values from selected row on worksheet
+    
+    Riases:
+        ValueError: if input is not an integer
     """
     yarns_data = SHEET.worksheet('yarns').get_all_values()
     yarns_data.pop(0)
@@ -249,8 +301,8 @@ def calculate(user_input):
         #from the list above
         while True:
             try:
-                selected_yarn = int(input('\nEnter the yarn number you want to use (1, 2,'
-                    ' etc.): \n').strip())
+                selected_yarn = int(input('\nEnter the yarn number you want to 
+                    'use (1, 2, etc.): \n').strip())
                 selected_yarn -= 1
 
                 #print out the user's selection
@@ -326,6 +378,7 @@ def calculate(user_input):
         return
 
 
+# Menu functions
 def calc_menu():
     """
     Display pattern selection and and back to sub menu until the user
@@ -367,11 +420,11 @@ def sub_menu(str, worksheet, add_func, remove_func):
     Display add, remove, and back sub menu until the user select a valid option
     then calls the requested funcion
     
-        Arguments:
-            str: title of the submenu (patterns/yarns/hooks)
-            worksheet: name of the worksheet on the spreadsheet
-            add_func: calls add_function
-            back_func: calls back function
+    Args:
+        str: string: title of the submenu (patterns/yarns/hooks)
+        worksheet: string: name of the worksheet on the spreadsheet
+        add_func: function: calls add_function
+        remove_func: function: calls remove function
     """
     while True:
         clear()
@@ -411,6 +464,9 @@ def sub_menu(str, worksheet, add_func, remove_func):
 
 
 def art():
+    """
+    ASCII text art of the program
+    """
     print("                                         .-.                     ")
     print("  .-.   .-                        .--.`-'               .-.      ")
     print("    /  (  .-.    ).--..  .-.     /  (_;    .-..  .-.    `-' .-.  ")
