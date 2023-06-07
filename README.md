@@ -35,6 +35,97 @@ All the data are stored in Google Sheets and is accessed through API.
     * if I don't have the hook, which size hook do I need?
 6. Successfully use the program without encountering any errors.
 
+## Features
+
+### Existing Features
+
+* __Main Menu & ASCII Art__
+
+    * The ASCII art and the main menu are displayed when the user starts the program.
+    * The particular font used to create the art conveys the feeling that the letters are made from stitches and have a slightly whimsical and magical quality to them.
+    * The main menu is simple and easy for the user to understand. The main menu contains 5 options for the user to choose from : 
+        1. Patterns-related actions
+        2. Yarns-related actions
+        3. Hooks-related actions
+        4. Calculate action
+        5. Exit program
+
+        <br>
+    * The user is prompted to select an option by entering a number respective to the options. If the user enters an incorrect value, an error message will be displayed and prompt the user to re-enter their option.
+    * The main menu will keep running until the user selected a valid option or decided to terminate the program.
+    
+    <br>
+
+* __Show Worksheet__
+
+    * The function shows the data in a tabulated form for the user to see what Patterns/Yarns/Hooks they have in the database.
+    * Underneath the table, the sub-menu is displayed for the user to select which actions they want to execute.
+
+    <br>
+
+* __Sub-Menu__ 
+
+    * The sub-menu is executed once the user selected a valid option from the main menu.
+    * The sub-menu is the same for Patterns/Yarns/Hooks to provide continuity for a better user experience.
+    * The sub-menu contains 3 options for the user to select from :
+        1. Add Pattern/Yarn/Hook
+        2. Remove Pattern/Yarn/Hook
+        3. Return to main menu
+    * The Add and Remove functions can only be selected via the sub-menu.
+    * Option 3 takes the user back to the main menu.
+    
+    <br>
+
+* __Add Menu__
+
+    * When the user selects the 1st option from the sub-menu, the get_user_data function is called.
+    * The user will then be prompted to add data in a Comma Separate Value (CSV) format. An example will be shown above the input field to aid the user with the data entry process
+    * The user's input will then be validated;
+        * If the user's input is valid, the data will be added to the spreadsheet.
+        * If the user's input is invalid, the user will be prompted to re-enter the data.
+    * After the user has entered valid data, the user will then be prompted to continue the program, and the updated table with the most recently entered data will be displayed.
+
+    <br>
+
+* __Remove Menu__
+
+    * When the user selects the 2nd option from the sub-menu, the remove_item function is called.
+    * The user will then be prompted to select a row of data they want to be removed from the database.
+    * The user's input will then be validated;
+        * If the user's input is valid, the data will be deleted from the spreadsheet.
+        * If the user's input is invalid, the user will be prompted to re-enter the data.
+        
+    <br>
+
+* __Calculate Menu__
+
+    * The function is executed when the user selected the 4th option from the main menu.
+    * The user will be prompted to select a pattern from the database.
+    * After the selection the program will then calculate these scenarios :
+        * Does the user have the correct weight yarn to complete this pattern?
+            * TRUE: print out the yarn that will be used. If there is more than 1 match, the user will be prompted to input an option to select from a list. Then move on to the next validation.
+                * Does the user have enough of the yarn?
+                    * TRUE: print out a message that the user can make this pattern.
+                    * FALSE: print out a message that the urges user to go buy more yarn.
+            * FALSE: print out a message that the user does not have the correct yarn weight and a message that urges the user to go buy more yarn.
+        * Does the user have the correct size hook to complete this pattern?
+            * TRUE: print out a message that the user have the correct size hook for the pattern.
+            * FALSE: print out a message that the user does not have the correct size hook for the pattern, and urges them to go buy some.
+
+    <br>
+
+### Feature that could be implemented in the future
+
+* __Graphic User Interface (GUI)__
+
+    * Since the program is run exclusively in the terminal, it is not very user friendly for a human user that has no knowledge of operating the terminal. A web-based or executable program will be more intuitive for the user.
+
+* __Data Duplication Validation__
+
+    * The current version of the program allows the user to enter duplicate data, such as the same yarn multiple times. When Data Duplication Validation is implemented, it can detect duplications in the data and merge them when applicable.
+
+<br>
+
 ## Technologies Used
 
 
