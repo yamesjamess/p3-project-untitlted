@@ -19,7 +19,24 @@ All the data are stored in Google Sheets and is accessed through API.
 * [Deployment](#deployment)
 * [Credits](#credits)
 
+## User Experience
+
+### As a user, I want to be able to :
+
+1. Identify what is the purpose of the program.
+2. Easily navigate through the different functionalities of the program.
+3. Use the program to see the patterns/yarns/hooks I have in the database.
+4. Use the program to add/remove patterns/yarns/hooks to and from the database
+5. Check to see what I can make based on my pattern selection, this information should include :
+    * if I have the yarn with the same weight as required in the pattern.
+    * if I have enough yarn to make this pattern.
+    * if I don't have enough, how much more do I need?
+    * if I have the hook required to make the pattern.
+    * if I don't have the hook, which size hook do I need?
+6. Successfully use the program without encountering any errors.
+
 ## Technologies Used
+
 
 ### Languages Used
 * [Python 3.11.1](https://www.python.org/downloads/release/python-3111/)
