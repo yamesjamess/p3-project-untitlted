@@ -126,6 +126,12 @@ All the data are stored in Google Sheets and is accessed through API.
 
 <br>
 
+## Design
+
+* Lucid Chart: Lucid Chart's flow chart was utilised during the design and planning stage of the project. It helps provide the developer with a clear path of what functions need to be defined and when each function should be called.
+
+![Flow Chart](documentation/planning/yarn_genie_flow_chart.png)
+
 ## Technologies Used
 
 
