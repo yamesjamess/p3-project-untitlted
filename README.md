@@ -202,6 +202,8 @@ All the data are stored in Google Sheets and is accessed through API.
 
 * How to use if name = main by [Geeks for Geeks](https://www.geeksforgeeks.org/what-does-the-if-__name__-__main__-do/)
 
+* How to clear terminal in python [Clear Screen - ASCII sequence](https://stackoverflow.com/questions/2084508/clear-terminal-in-python/2084521)
+
 * All other content was written by the developer
 
 ### Achknowledgements
