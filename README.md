@@ -160,6 +160,34 @@ All the data are stored in Google Sheets and is accessed through API.
 
 * [Heroku](https://heroku.com): is used to host and deploy the program.
 
+## Testing
+
+### Validator Testing
+
+* [CI Python Linter](https://pep8ci.herokuapp.com/)
+
+    - result for run.py
+
+    ![Python Validator Results](documentation/validation_results/python_validator_result.png)
+
+### Test Cases and Results
+
+* The table below details the testing case that was used and the result of the test.
+
+![Test Case](#)
+
+### Known Bugs
+
+* If the user types in a space before or after their input, either intentionally or not, the user gets an incorrect response.
+    * This has been fixed by adding .strip() to user input where the input is expecting certain inputs.
+
+    <br>
+* The program is throwing an IndexError when the user selected an index that is out of bounds.
+    * This bug has been fixed by checking the length of the list before accessing the index.
+
+### Unfixed Bugs
+* There are no unfixed bugs that the developer is aware of.
+
 ## Credits
 
 ### Contents
