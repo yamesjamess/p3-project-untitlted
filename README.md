@@ -128,34 +128,37 @@ All the data are stored in Google Sheets and is accessed through API.
 
 ## Design
 
-* Lucid Chart: Lucid Chart's flow chart was utilised during the design and planning stage of the project. It helps provide the developer with a clear path of what functions need to be defined and when each function should be called.
+* Lucidchart: Lucidchart's flow chart was utilised during the design and planning stage of the project. It helps provide the developer with a clear path of what functions need to be defined and when each function should be called.
 
 ![Flow Chart](documentation/planning/yarn_genie_flow_chart.png)
 
 ## Technologies Used
 
-
 ### Languages Used
+
 * [Python 3.11.1](https://www.python.org/downloads/release/python-3111/)
 
 ### Frameworks, Libraries & Programs Used
-* [Google Spreadsheets]
 
-* [Google Drive API]
+* [Google Sheets](https://www.google.com/sheets/about/): Used as external data storage for Patterns, Yarns, and Hooks.
 
-* [Google Sheets API]
+* [Google Drive API](https://developers.google.com/drive/api/guides/about-sdk): Used to provide the program access to Google Drive services, which hosts the Google Sheets file.
 
-* [gspread]
+* [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts): Used to provide the program access to Google Sheets.
 
-* [Google Auth]
+* [gspread](https://docs.gspread.org/en/v5.7.1/): Python API for Google Sheets.
 
-* [Lucid Chart]
+* [Google Auth](https://developers.google.com/identity/authorization): Used by the program for the authentication process with Google to access other services such as Google Drive and Google Sheets.
 
-* [patorjk.com Text to ASCII art](https://patorjk.com/software/taag/)
+* [Lucidchart](https://www.lucidchart.com/pages/): Used to create a flowchart during the design and planning stage. Outline what function is needed for the program.
 
-* [Git]: was used for version controlling purposes through git commands via the terminal on GitPod and is pushed to GitHub for cloud-based storage.
+* [patorjk.com TAAG](https://patorjk.com/software/taag/): Used to generate ASCII art from plain text.
 
-* [GitHub]: is used to host the repository of the project and is also used for the deployment of the website.
+* [Git](https://git-scm.com/): was used for version controlling purposes through git commands via the terminal on GitPod and is pushed to GitHub for cloud-based storage.
+
+* [GitHub](https://github.com/): is used to host the repository of the project and is also used for the deployment of the website.
+
+* [Heroku](https://heroku.com): is used to host and deploy the program.
 
 ## Credits
 
