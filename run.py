@@ -15,6 +15,7 @@ SHEET = GSPREAD_CLIENT.open('yarn_genie')
 patterns = SHEET.worksheet('patterns')
 data = patterns.get_all_values()
 
+
 # This code is from Clear Screen - ASCII sequence
 def clear():
     """
@@ -416,6 +417,7 @@ def calc_menu():
             selected_row = input('Enter a number or enter "x"'
                                  ' to cancel...\n').strip()
 
+
 # This code section is inspired by elainebroche
 def sub_menu(str, worksheet, add_func, remove_func):
     """
@@ -475,6 +477,7 @@ def art():
     print("     `--| `-^ '   ' '   `---|  `-' ' ' ' `-' ")
     print("     .- |                ,-.|                ")
     print("     `--'                `-+'                \n")
+
 
 # This code section is inspired by elainebroche
 def main_menu():

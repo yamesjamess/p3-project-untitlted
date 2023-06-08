@@ -188,6 +188,103 @@ All the data are stored in Google Sheets and is accessed through API.
 ### Unfixed Bugs
 * There are no unfixed bugs that the developer is aware of.
 
+## Deployment
+
+### How to clone this repository
+* Visit the main repository at https://github.com/yamesjamess/p3-yarn-genie.
+
+* Click the "Code" button to the right of the screen, click HTTPs and copy the link present there.
+
+* Open a GitBash terminal and navigate to the directory where you want to clone.
+
+* In the terminal, type "git clone" then paste in the copied URL and press the Enter key to begin the cloning process.
+
+### How to fork this repository
+* Visit the main repository at https://github.com/yamesjamess/p3-yarn-genie.
+
+* On the top right-hand corner click on the "Fork" button.
+
+* You will be redirected to a new page, from there enter the name you desire the name the forked repository and click "Create Fork"
+
+* You will now have a Fork copy of the repository on your own repository.
+
+### How to setup and configure Google Sheets and APIs
+
+<details>
+    <summary>Steps to setup and configure access to data</summary>
+
+* Create a spreadsheet on Google Sheets
+    * Visit [Google Sheets website](https://www.google.com/sheets/about/)
+    * Log in to your Google account, if you do not have a Google account you must create one prior to this step.
+    * Create a spreadsheet and name the file "yarn_genie". In the spreadsheet create 2 more worksheets, you should have 3 in total (the 1st one is created by default). Rename them to patterns, yarns, and hooks respectively.
+    * In row 1 of the patterns sheet, enter the following headings in each cell: Name, Weight, Len (m), Hook Size (mm)
+    * In row 1 of the yarns sheet, enter the following headings in each cell: Name, Material, Weight, Len (m), Colour, Qty.
+    * In row 1 of the hooks sheet, enter the following heading in the first cell: Hook Size (mm).
+    * The sample data used for this project can be seen [here], however, it is not necessary to use the same data.
+
+* Setup APIs using Google Cloud Platform
+    * Access [Google Cloud Platform](https://console.cloud.google.com/) 
+        * Google Account required.
+    * Create a new project on the Google Cloud Platform and give the project a unique name. After creation select the project to go to the project dashboard.
+    * Setup Google Sheets API
+        * Go to the APIs & Services section from the hamburger menu.
+        * Select Library from the menu
+        * Search for Google Sheets API
+        * Select the Google Sheets API and click Enable
+    * Setup Google Drive API and Credentials
+        * Go to the APIs & Services section from the hamburger menu.
+        * Select Library from the menu
+        * Search for Google Drive API
+        * Select the Google Drive API and click Enable
+        * Wait to be redirected to a new page, once redirected click on Create Credentials
+        * Select Google Drive API from the drop-down bar
+        * For the "What data will you be accessing?" question, select Application Data.
+        * For the "Are you planning to use this API with Compute Engine, Kubernetes Engine, App Engine, or Cloud Functions?" question, select No, I'm not using them.
+        * Click Next.
+        * Enter a Service Account name, you can call it anything you like - for this project, it will be "YarnGenie" - then click Create.
+        * In the Role Dropdown box choose Basic > Editor then press Continue.
+        * Then leave the rest of the options blank, and click Done.
+        * On the next page, click on the Service Account that has been created.
+        * On the next page, click on the Keys tab.
+        * Click on the Add Key dropdown and select Create New Key.
+        * Select JSON and then click Create. This will trigger the JSON file with your API credentials in it to download to your machine. 
+        * Rename the downloaded file to cred.json
+        * The file can then be added to the project by dragging and dropping the file into the IDE of choice.
+        * If creds.json is not listed in the .gitignore file, here is the time to do so.
+        * Open the creds.json file and locate the "client email", and copy the email.
+        * Go to your yarn_genie spreadsheet on Google Sheets, click on the Share button and paste the email in the field and provide it with Editor privileges.
+</details>
+
+### How to deploy the program on Heroku
+<deatils>
+    <summary>Steps to deploy the project on Heroku</summary>
+
+* Update the requirements.txt file by following the following steps.
+    * Enter 'pip3 freeze > requirements.txt' into the terminal and press Enter
+    * Once the IDE finishes updating the file, commit it to git and push it to GitHub.
+* Log in to [Heroku](https://www.heroku.com/)
+    * Heroku account is required.
+* From the dashboard, click "New" to create a new application.
+* Enter an app name, for this project it will be yarn-genie and select the appropriate region. Then click the Create App button
+* On the next page, go to the Settings tab and go to the Config Vars section.
+* To create a new Config Vars, press Reveal Config Vars, and fill in the KEY and VALUE fields.
+    * In the KEY field, enter 'CREDS' and in the VALUE field, copy and paste all the code from the creds.json file into the field. Then press Add.
+    * In the next KEY and VALUE fields, enter 'PORT' and '8000' respectively.
+* Scroll down to the Buildpacks section and click Add buildpacks.
+    * Select Python from the options and click Save Changes.
+    * Click Add Buildpacks again, and this time select nodejs and click Save Changes.
+    * Make sure that in the buildpacks list, Python is on the top and nodejs is below.
+* Go to the Deploy tab
+* Select GitHub as the deployment method and connect to your GitHub account.
+* Search for the name of the repository, for this project it's [https://github.com/yamesjamess/p3-yarn-genie](https://github.com/yamesjamess/p3-yarn-genie), and click Connect to link the repository to Heroku.
+* Scroll down and select either Automatic Deploys or Manual Deploys.
+    * Automatic deploys will automatically build your application every time new changes are pushed to GitHub
+    * Manual deploys allow you to deploy your project manually
+    * For this project, the Automatic deployment method was selected.
+* The application can be run by clicking the Open app button.
+* The live project can be viewed [here](https://yarn-genie.herokuapp.com/).
+</details>
+
 ## Credits
 
 ### Contents
