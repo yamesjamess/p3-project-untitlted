@@ -156,7 +156,7 @@ All the data are stored in Google Sheets and is accessed through API.
 
 * [Git](https://git-scm.com/): was used for version controlling purposes through git commands via the terminal on GitPod and is pushed to GitHub for cloud-based storage.
 
-* [GitHub](https://github.com/): is used to host the repository of the project and is also used for the deployment of the website.
+* [GitHub](https://github.com/): is used to host the repository of the project.
 
 * [Heroku](https://heroku.com): is used to host and deploy the program.
 
