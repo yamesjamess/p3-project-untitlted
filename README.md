@@ -145,7 +145,7 @@ All the data are stored in Google Sheets and is accessed through API.
 
     <br>
 
-    * All the screenshots of the different scenarios can be found ![here]()
+    * All the screenshots of the different scenarios can be found [here](https://github.com/yamesjamess/p3-yarn-genie/tree/main/documentation/support_images/calc_results)
 
 ### Feature that could be implemented in the future
 
