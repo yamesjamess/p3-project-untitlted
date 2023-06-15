@@ -11,6 +11,7 @@ The user can utilise the application to view the data, add data to the database,
 All the data are stored in Google Sheets and is accessed through API.
 
 ## Table of Contents
+---
 * [User Experience](#user-experience)
 * [Features](#features)
 * [Design](#design)
@@ -20,6 +21,7 @@ All the data are stored in Google Sheets and is accessed through API.
 * [Credits](#credits)
 
 ## User Experience
+---
 
 ### As a user, I want to be able to :
 
@@ -36,6 +38,7 @@ All the data are stored in Google Sheets and is accessed through API.
 6. Successfully use the program without encountering any errors.
 
 ## Features
+---
 
 ### Existing Features
 
@@ -164,12 +167,14 @@ All the data are stored in Google Sheets and is accessed through API.
 <br>
 
 ## Design
+---
 
 * Lucidchart: Lucidchart's flow chart was utilised during the design and planning stage of the project. It helps provide the developer with a clear path of what functions need to be defined and when each function should be called.
 
 ![Flow Chart](documentation/planning/yarn_genie_flow_chart.png)
 
 ## Technologies Used
+---
 
 ### Languages Used
 
@@ -198,6 +203,7 @@ All the data are stored in Google Sheets and is accessed through API.
 * [Heroku](https://heroku.com): is used to host and deploy the program.
 
 ## Testing
+---
 
 ### Validator Testing
 
@@ -230,6 +236,7 @@ All the data are stored in Google Sheets and is accessed through API.
 * There are no unfixed bugs that the developer is aware of.
 
 ## Deployment
+---
 
 ### How to clone this repository
 * Visit the main repository at https://github.com/yamesjamess/p3-yarn-genie.
@@ -326,6 +333,7 @@ __Steps to deploy the project on Heroku__
 * The live project can be viewed [here](https://yarn-genie.herokuapp.com/).
 
 ## Credits
+---
 
 ### Contents
 * The Google Spreadsheet "Yarn Genie" that this application ulitised is created by the developer
