@@ -83,6 +83,8 @@ def remove_item(worksheet):
     """
     print(f'\nWhich item do you want to from your {worksheet} list?\n')
     worksheet_to_remove = SHEET.worksheet(worksheet)
+    worksheet_list = worksheet_to_remove.get_all_values()
+    worksheet_list.pop(0)
     user_input = input('Enter a number or enter "x" to cancel...\n')
 
     while True:
@@ -90,7 +92,8 @@ def remove_item(worksheet):
             print('\nReturning to the sub-menu')
             input('\nPress Enter to continue...\n')
             break
-        elif user_input.isdigit() and user_input != '0':
+        elif user_input.isdigit() and (0 < int(user_input)
+                                       <= len(worksheet_list)):
             index = int(user_input)
             index += 1
             worksheet_to_remove.delete_rows(index)

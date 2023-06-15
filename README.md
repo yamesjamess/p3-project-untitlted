@@ -247,8 +247,7 @@ All the data are stored in Google Sheets and is accessed through API.
 
 ### How to setup and configure Google Sheets and APIs
 
-<details>
-    <summary>Steps to setup and configure access to data</summary>
+__Steps to setup and configure access to data__
 
 * Create a spreadsheet on Google Sheets
     * Visit [Google Sheets website](https://www.google.com/sheets/about/)
@@ -258,6 +257,8 @@ All the data are stored in Google Sheets and is accessed through API.
     * In row 1 of the yarns sheet, enter the following headings in each cell: Name, Material, Weight, Len (m), Colour, Qty.
     * In row 1 of the hooks sheet, enter the following heading in the first cell: Hook Size (mm).
     * The sample data used for this project can be seen [here], however, it is not necessary to use the same data.
+
+    <br>
 
 * Setup APIs using Google Cloud Platform
     * Access [Google Cloud Platform](https://console.cloud.google.com/) 
@@ -290,11 +291,10 @@ All the data are stored in Google Sheets and is accessed through API.
         * If creds.json is not listed in the .gitignore file, here is the time to do so.
         * Open the creds.json file and locate the "client email", and copy the email.
         * Go to your yarn_genie spreadsheet on Google Sheets, click on the Share button and paste the email in the field and provide it with Editor privileges.
-</details>
 
 ### How to deploy the program on Heroku
-<deatils>
-    <summary>Steps to deploy the project on Heroku</summary>
+
+__Steps to deploy the project on Heroku__
 
 * Update the requirements.txt file by following the following steps.
     * Enter 'pip3 freeze > requirements.txt' into the terminal and press Enter
@@ -320,7 +320,6 @@ All the data are stored in Google Sheets and is accessed through API.
     * For this project, the Automatic deployment method was selected.
 * The application can be run by clicking the Open app button.
 * The live project can be viewed [here](https://yarn-genie.herokuapp.com/).
-</details>
 
 ## Credits
 
