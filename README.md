@@ -211,7 +211,8 @@ All the data are stored in Google Sheets and is accessed through API.
 
 * The table below details the testing case that was used and the result of the test.
 
-![Test Case](#)
+![Test Case 1](documentation/support_images/yarn_genie_test_case_1.png)
+![Test Case 2](documentation/support_images/yarn_genie_test_case_2.png)
 
 ### Known Bugs
 
