@@ -50,10 +50,13 @@ All the data are stored in Google Sheets and is accessed through API.
         4. Calculate action
         5. Exit program
 
-        <br>
     * The user is prompted to select an option by entering a number respective to the options. If the user enters an incorrect value, an error message will be displayed and prompt the user to re-enter their option.
     * The main menu will keep running until the user selected a valid option or decided to terminate the program.
-    
+
+    <br>
+
+    ![Main Menu](documentation/support_images/yarn_genie_terminal.png)
+
     <br>
 
 * __Show Worksheet__
@@ -75,15 +78,28 @@ All the data are stored in Google Sheets and is accessed through API.
     * Option 3 takes the user back to the main menu.
     
     <br>
+    
+    ![Show Worksheet](documentation/support_images/yarn_genie_yarns_sub.png)
+
+    <br>
 
 * __Add Menu__
 
     * When the user selects the 1st option from the sub-menu, the get_user_data function is called.
     * The user will then be prompted to add data in a Comma Separate Value (CSV) format. An example will be shown above the input field to aid the user with the data entry process
+    
+    <br>
+
+    ![Add Menu](documentation/support_images/yarn_genie_patterns_add.png)
+    
     * The user's input will then be validated;
         * If the user's input is valid, the data will be added to the spreadsheet.
         * If the user's input is invalid, the user will be prompted to re-enter the data.
     * After the user has entered valid data, the user will then be prompted to continue the program, and the updated table with the most recently entered data will be displayed.
+
+    <br>
+    
+    ![Add Success](documentation/support_images/yarn_genie_patterns_add_success.png)
 
     <br>
 
@@ -94,13 +110,28 @@ All the data are stored in Google Sheets and is accessed through API.
     * The user's input will then be validated;
         * If the user's input is valid, the data will be deleted from the spreadsheet.
         * If the user's input is invalid, the user will be prompted to re-enter the data.
-        
+    
     <br>
+
+    ![Remove Menu](documentation/support_images/yarn_genie_patterns_remove_success.png)
+
+    <br>
+
 
 * __Calculate Menu__
 
     * The function is executed when the user selected the 4th option from the main menu.
+    
+    <br>
+
+    ![Calculate Menu](documentation/support_images/yarn_genie_calc_menu.png)
+    
     * The user will be prompted to select a pattern from the database.
+    
+    <br>
+
+    ![Pattern Selected](documentation/support_images/yarn_genie_calc_pattern_selected.png)
+
     * After the selection the program will then calculate these scenarios :
         * Does the user have the correct weight yarn to complete this pattern?
             * TRUE: print out the yarn that will be used. If there is more than 1 match, the user will be prompted to input an option to select from a list. Then move on to the next validation.
@@ -114,6 +145,8 @@ All the data are stored in Google Sheets and is accessed through API.
 
     <br>
 
+    * All the screenshots of the different scenarios can be found ![here]()
+
 ### Feature that could be implemented in the future
 
 * __Graphic User Interface (GUI)__
@@ -123,6 +156,10 @@ All the data are stored in Google Sheets and is accessed through API.
 * __Data Duplication Validation__
 
     * The current version of the program allows the user to enter duplicate data, such as the same yarn multiple times. When Data Duplication Validation is implemented, it can detect duplications in the data and merge them when applicable.
+
+* __Better Data Input Validation__
+
+    * The current version of the program allows the user the input data in CSV format but does not strictly validate the what type of values the user has input. For example, when adding a new pattern the user is given an example "Kids Gloves, Double Knit, 400, 3.00" but if the user input "400, Double Knit, Kids Gloves, 3.00", the program sees this as an valid input.
 
 <br>
 
