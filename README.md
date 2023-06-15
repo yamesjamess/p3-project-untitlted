@@ -222,6 +222,9 @@ All the data are stored in Google Sheets and is accessed through API.
 * The program is throwing an IndexError when the user selected an index that is out of bounds.
     * This bug has been fixed by checking the length of the list before accessing the index.
 
+* The program is allowing the user to select number beyond the rows that contains data in the remove item function
+    * This bug has been fixed by turning the data from the worksheet to a list then limits the user from selecting an option that is beyond the length of the list.
+
 ### Unfixed Bugs
 * There are no unfixed bugs that the developer is aware of.
 
