@@ -1,6 +1,6 @@
 <h1 align="center">Yarn Genie</h1>
 
-[View the live project here](https://yarn-genie.herokuapp.com/)
+[View the live project here](https://yarn-genie.herokuapp.com/) (Website is taken offline, please contact me if you wish to visit the website)
 
 ![Yarn Genie](documentation/support_images/yarn_genie_terminal.png)
 
